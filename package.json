@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "18.20.7"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start": "node build/index.js",
-    "dev": "ts-node index.ts"
+    "start": "npm run migration  && node build/index.js",
+    "start:dev": "ts-node index.ts",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration:generate": "npm run typeorm migration:generate  -- -d ./src/configurations/data-source.ts src/database/migrations/migrate --pretty",
+    "migration:run:local": "npm run typeorm migration:run -- -d ./src/configurations/data-source.ts",
+    "migration": "npm run typeorm migration:run -- -d ./src/configurations/data-source.js",
+    "migration:revert": "npm run typeorm migration:revert -- -d ./src/configurations/data-source.ts"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +22,10 @@
   "dependencies": {
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^2.1.0",
+    "dotenv": "^16.5.0",
+    "env-cmd": "^10.1.0",
     "fastify": "^4.26.0",
+    "nodemon": "^3.1.9",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.2.1",
     "ts-node": "^10.9.2",
@@ -22,6 +33,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.16",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
   }
 }

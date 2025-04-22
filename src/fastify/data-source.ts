@@ -1,6 +1,6 @@
-import { FastifyInstance } from "fastify";
-import { AppDataSource } from "../data-source";
+import { FastifyInstance } from 'fastify';
+import { AppDataSource } from '../configurations/data-source';
 
 export async function datasource(fastify: FastifyInstance) {
-    await AppDataSource.initialize()
+  await AppDataSource.initialize();
 }

@@ -1,0 +1,33 @@
+revolte:
+  version: "1.0"
+  project: "instagram"
+  appName: "threads"
+  env:
+    staging:
+      branch: main
+      services:
+        rid_1:
+          name: "auth-service"
+          type: "WEB_SERVICE"
+          entryPoint: "app.ts"
+          specifications:
+            cpu: 2
+            memory: 2
+            storage: 30
+          properties:
+            health: "/health"
+            port: 8080
+            variables:
+              DATABASE_URL: "#{threadsDatabase.dbUrl}"
+              DATABASE_PORT: "#{threadsDatabase.dbPort}"
+              DATABASE_USERNAME: "#{threadsDatabase.dbUsername}"
+              DATABASE_PASSWORD: "#{threadsDatabase.dbPassword}"
+              DATABASE_NAME: "#{threadsDatabase.dbName}"
+        rid_2:
+          name: "threadsDatabase"
+          type: "DATABASE"
+          specifications:
+            cpu: 2
+            memory: 1
+            storage: 50
+            engine: "postgres"
