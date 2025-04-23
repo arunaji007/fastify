@@ -18,7 +18,7 @@ export async function createServer() {
   await server.register(routes);
   await server.ready();
   server.swagger();
-  server.listen({ port: 8000, host: '0.0.0.0' }, async (err, address) => {
+  server.listen({ port: 8080, host: '0.0.0.0' }, async (err, address) => {
     if (err) {
       console.error(err);
       process.exit(1);

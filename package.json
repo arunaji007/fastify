@@ -8,12 +8,12 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start": "node index.js",
+    "start": "npm run migration && node index.js",
     "start:dev": "ts-node index.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migration:generate": "npm run typeorm migration:generate  -- -d ./src/configurations/data-source.ts src/database/migrations/migrate --pretty",
     "migration:run:local": "npm run typeorm migration:run -- -d ./src/configurations/data-source.ts",
-    "migration": "npm run typeorm migration:run -- -d ./build/src/configurations/data-source.js",
+    "migration": "npm run typeorm migration:run -- -d ./src/configurations/data-source.js",
     "migration:revert": "npm run typeorm migration:revert -- -d ./src/configurations/data-source.ts"
   },
   "keywords": [],
